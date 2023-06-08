@@ -7,85 +7,15 @@ import { useDraw } from '@/hooks/useDraw'
 import { ChromePicker } from 'react-color'
 
 import VectorType from "@/types/VectorType";
+import LeftSidebar from "@/components/LeftSideBar";
+import ObjectDetails from "@/components/ObjectDetails";
 
 
 
 export default function Editor() {
-    const [color, setColor] = useState<string>('#000')
+    const [color, setColor] = useState<string>('#000000')
     const [vector, setVector] = useState<VectorType>();
-    // const vectorLine = new VectorLine()
-    const { canvasRef, onMouseDown, clear, setMode, selectedObject } = useDraw(color)
-
-    // const [objects, setObjects] = useState<VectorObject[]>([]);
-    // const model = new CanvasModel();
-
-    // function drawLine({ startPoint, prevPoint, currentPoint, ctx }: Draw) {
-    //     const { x: currX, y: currY } = currentPoint
-    //     const lineColor = color
-    //     const lineWidth = 5
-
-    //     let cur = prevPoint ?? currentPoint
-    //     ctx.beginPath()
-    //     ctx.lineWidth = lineWidth
-    //     ctx.strokeStyle = lineColor
-    //     ctx.moveTo(cur.x, cur.y)
-    //     ctx.lineTo(currX, currY)
-    //     ctx.stroke()
-
-    //     ctx.fillStyle = lineColor
-    //     ctx.beginPath()
-    //     ctx.arc(cur.x, cur.y, 2, 0, 2 * Math.PI)
-    //     ctx.fill()
-    // }
-
-    // function drawRect({ startPoint, ctx, currentPoint, prevPoint, isDraw }: Draw) {
-    //     const { x: currX, y: currY } = currentPoint
-    //     const lineColor = color
-    //     const lineWidth = 5
-    //     if(isDraw){
-    //         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    //     }
-    //     let cur = prevPoint ?? currentPoint
-    //     const width = currX - startPoint.x; // 사각형의 가로 길이 계산
-    //     const height = currY - startPoint.y; // 사각형의 세로 길이 계산
-    //     ctx.beginPath()
-    //     ctx.lineWidth = lineWidth
-    //     ctx.strokeStyle = lineColor
-    //     // ctx.moveTo(startPoint.x, startPoint.y)
-    //     // ctx.lineTo(currX, currY)
-
-        
-    //     ctx.rect(startPoint.x, startPoint.y, width, height);
-    //     ctx.stroke()
-        
-
-    //     // ctx.fillStyle = lineColor
-    //     // ctx.beginPath()
-    //     // ctx.arc(startPoint.x, startPoint.y, 2, 0, 2 * Math.PI)
-    //     // ctx.fill()
-    // }
-
-    // function drawEllipse({ startPoint, prevPoint, currentPoint, ctx, isDraw }: Draw) {
-    //     const { x: currX, y: currY } = currentPoint
-    //     const lineColor = color
-    //     const lineWidth = 5
-        
-    //     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    //     let cur = prevPoint ?? currentPoint
-    //     let rad = Math.abs(currX- startPoint.x)
-    //     ctx.lineWidth = lineWidth
-    //     ctx.strokeStyle = lineColor
-    //     // ctx.moveTo(startPoint.x, startPoint.y)
-    //     // ctx.lineTo(currX, currY)
-    //     ctx.beginPath()
-    //     ctx.arc(startPoint.x, startPoint.y, rad, 0, 2 * Math.PI)
-    //     ctx.stroke()
-    //     ctx.closePath()
-
-    //     // ctx.fillStyle = lineColor
-    //     // ctx.beginPath()
-    //     // ctx.fill()
-    // }
+    const { canvasRef, onMouseDown, clear, mode, setMode, selectedObject } = useDraw(color)
 
     // const addObject = (obj: VectorObject) => {
     //     model.addObject(obj);
@@ -102,9 +32,15 @@ export default function Editor() {
 
     return (
         <>        
-        <div className='w-screen h-screen bg-white flex justify-center items-center'>
-            <div className='flex flex-col gap-10 pr-10'>
-                <button 
+        <div className='bg-[#2b2b2b] flex h-screen'>
+            <div className='flex flex-col'>
+                <LeftSidebar 
+                    setMode={setMode} 
+                    clear={clear}
+                    color={color} 
+                    setColor={setColor}
+                />
+                {/* <button 
                     type='button' 
                     className='p-2 rounded-md border border-black' 
                     onClick={()=>{setMode(() => 'select')}}
@@ -145,19 +81,23 @@ export default function Editor() {
                     onClick={clear}
                 >
                 Clear 
-                </button>
-                <ChromePicker color={color} onChange={(e) => setColor(e.hex)} />
+                </button> */}
+                {/* <ChromePicker color={color} onChange={(e) => setColor(e.hex)} /> */}
             </div>
+            <div>
+
             <canvas
                 ref={canvasRef}
                 onMouseDown={onMouseDown}
-                width={650}
+                width={850}
                 height={650}
-                className='border border-black rounded-md'
-            />
-        <div className='w-screen bg-white flex justify-center items-center'>
+                className='bg-white border border-black rounded-md'
+                />
+            </div>
+            <ObjectDetails mode={mode}/>
+        {/* <div className='w-screen bg-white flex justify-center items-center'>
             console.log(selectedObject)
-        </div>
+        </div> */}
         </div>
         </>
     )

@@ -75,6 +75,25 @@ export const useDraw = (color:string) => {
         }
     }
 
+    // const updatedObjects = (dx:number, dy:number) => objects.map((obj, idx) => {
+    //     if (selectedObjects.includes(idx)) {
+    //         const updatedStartPoint: Point = {
+    //         x: obj.startPoint.x + dx,
+    //         y: obj.startPoint.y + dy,
+    //     };
+    //     const updatedCurrentPoint: Point = {
+    //         x: obj.currentPoint.x + dx,
+    //         y: obj.currentPoint.y + dy,
+    //     };
+    //     return {
+    //         ...obj,
+    //         startPoint: updatedStartPoint,
+    //         currentPoint: updatedCurrentPoint,
+    //     };
+    //     }
+    //     return obj;
+    // });
+
     const findSelectedObjectIndex = (point: Point): number | null => {
         const canvas = canvasRef.current;
         if (!canvas) return null;
@@ -180,7 +199,15 @@ export const useDraw = (color:string) => {
             setStartPoint(currentPoint);
             console.log(objects)
             objects.forEach((obj) => {
+                if (obj.isSelect === true) {
+                    vectors.create(obj);
+                }
+                // vectors.create(obj);
+            });
+            objects.forEach((obj) => {
+                if (obj.isSelect === false) { 
                 vectors.create(obj);
+                }
             });
             }
         
@@ -212,6 +239,7 @@ export const useDraw = (color:string) => {
                 };
                 
                 setMouseDown(false);
+
                 if (mode !== 'select'){
 
                     //@ts-ignore
@@ -240,6 +268,7 @@ export const useDraw = (color:string) => {
                             ...obj,
                             startPoint: updatedStartPoint,
                             currentPoint: updatedCurrentPoint,
+                            isDraw: false
                         };
                         }
                         return obj;
@@ -264,5 +293,5 @@ export const useDraw = (color:string) => {
         };
     }, [startPoint, mouseDown, objects, mode, selectedObjects]);
 
-    return { canvasRef, onMouseDown, clear, setMode, selectedObject };
+    return { canvasRef, onMouseDown, clear, mode, setMode, selectedObject };
 };

@@ -1,9 +1,11 @@
 import Navbar from '@/components/navbar'
 import './globals.css'
-import { Inter } from 'next/font/google'
-import Landing from '@/components/landing'
+import { Nanum_Gothic } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const nanum_gothic = Nanum_Gothic({
+  subsets: ["latin"],
+  weight: "700"
+ })
 
 export const metadata = {
   title: 'Create Next App',
@@ -17,8 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <div className="bg-white">
-        <body className={inter.className}>
+      <div className="bg-[#2b2b2b]">
+        <body className={nanum_gothic.className}>
           <Navbar/>
           {children}
         </body>

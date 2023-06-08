@@ -1,11 +1,11 @@
 const Navbar = () => {
 
     return (
-        <nav className="bg-[#2b2b2b] border-gray-200 dark:bg-gray-900">
+        <nav className="bg-black border-gray-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="" className="flex items-center text-white">
                 {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" /> */}
-                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">KURIDIH</span>
+                <span className="self-center text-2xl font-semibold whitespace-nowrap">KURIDIH</span>
             </a>
             <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
             <span className="sr-only">Open main menu</span>
@@ -17,7 +17,13 @@ const Navbar = () => {
                 <a href="#" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
                 </li> */}
                 <li>
-                <a href="https://github.com/ryuni-dev/KURIDIH" className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Github</a>
+                <a 
+                    href="https://github.com/ryuni-dev/KURIDIH" 
+                    target='_blank' 
+                    className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                >
+                    Github
+                </a>
                 </li>
             </ul>
             </div>
