@@ -67,7 +67,7 @@ export const useDraw = (color:string) => {
 
     const checkOutInCanvas = (point: Point): boolean => {
         const { x, y } = point;
-        if (x < 0 || y < 0 || x > 650 || y > 650) {
+        if (x < 0 || y < 0 || x > 650 || y > 850) {
             return false;
         }
         else {
