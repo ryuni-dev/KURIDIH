@@ -2,9 +2,10 @@ import { Point } from "@/types/point";
 
 interface ObjectDetailsProps {
     mode: string,
-    startPoint: Point,
-    endPoint: Point,
-    color: string,
+    startPoint: Point | undefined,
+    endPoint: Point | undefined,
+    color: string | undefined,
+    zOrder: number | undefined,
 }
 
 const ObjectDetails: React.FC<ObjectDetailsProps> = ({ 
@@ -12,6 +13,7 @@ const ObjectDetails: React.FC<ObjectDetailsProps> = ({
     startPoint,
     endPoint,
     color,
+    zOrder,
 }) => {
     
     return (
@@ -29,21 +31,9 @@ const ObjectDetails: React.FC<ObjectDetailsProps> = ({
                         disabled
                         readOnly
                     />
-                    {/* <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> */}
                     </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
-                    {/* <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-200 text-xs font-bold mb-2" htmlFor="grid-first-name">
-                        x
-                    </label>
-                    <input 
-                        className="appearance-none block w-full bg-gray-200 text-gray-200 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
-                        id="grid-first-name" 
-                        type="number" 
-                        placeholder="x"/>
-                    {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
-                    {/* </div> */}
                     <div className="w-full md:w-1/2 px-3">
                         <label className="block uppercase tracking-wide text-gray-200 text-xs font-bold mb-2" htmlFor="grid-last-name">
                             Start : x
@@ -52,7 +42,7 @@ const ObjectDetails: React.FC<ObjectDetailsProps> = ({
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                             id="grid-last-name" 
                             type="number"
-                            value={startPoint.x}
+                            value={startPoint? startPoint.x : 0}
                             placeholder="x"/>
                     </div>
                     <div className="w-full md:w-1/2 px-3">
@@ -63,7 +53,7 @@ const ObjectDetails: React.FC<ObjectDetailsProps> = ({
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                         id="grid-last-name" 
                         type="number" 
-                        value={startPoint.y}
+                        value={startPoint ? startPoint.y : 0}
                         placeholder="y"/>
                     </div>
                 </div>
@@ -77,7 +67,7 @@ const ObjectDetails: React.FC<ObjectDetailsProps> = ({
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                             id="grid-last-name" 
                             type="number"
-                            value={endPoint.x}
+                            value={endPoint ? endPoint.x : 0}
                             placeholder="x"/>
                     </div>
                     <div className="w-full md:w-1/2 px-3">
@@ -88,7 +78,7 @@ const ObjectDetails: React.FC<ObjectDetailsProps> = ({
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                         id="grid-last-name" 
                         type="number" 
-                        value={endPoint.y}
+                        value={endPoint ? endPoint.y : 0}
                         placeholder="y"/>
                     </div>
                 </div>
@@ -96,12 +86,13 @@ const ObjectDetails: React.FC<ObjectDetailsProps> = ({
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3">
                         <label className="block uppercase tracking-wide text-gray-200 text-xs font-bold mb-2" htmlFor="grid-last-name">
-                            Size
+                            z-order
                         </label>
                         <input 
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                             id="grid-last-name" 
-                            type="number" 
+                            type="number"
+                            value={zOrder ? zOrder : 0}
                             placeholder="Size"/>
                     </div>
                     
@@ -113,7 +104,7 @@ const ObjectDetails: React.FC<ObjectDetailsProps> = ({
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                         id="grid-last-name" 
                         type="text" 
-                        value={color}
+                        value={color ? color : ""}
                         placeholder="Color"/>
                     </div>
                 </div>

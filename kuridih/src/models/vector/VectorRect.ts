@@ -1,45 +1,39 @@
 import VectorType from "@/types/VectorType";
 import Vector from "./VectorObject";
+import { Point } from "@/types/point";
 
 class VectorRect extends Vector {
-    constructor(props: VectorType) {
-        super(props);
-    }
-
-    draw() {
-        const { x: currX, y: currY } = this.props.currentPoint;
-        const ctx  = this.props.ctx;
+    draw(object: VectorType) {
+        const { x: currX, y: currY } = object.currentPoint;
+        const ctx  = object.ctx;
         const lineWidth = 3;
-        if(this.props.isDraw){
+        if(object.isDraw){
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         }
 
-        const width = currX - this.props.startPoint.x; 
-        const height = currY - this.props.startPoint.y; 
+        const width = currX - object.startPoint.x; 
+        const height = currY - object.startPoint.y; 
 
         ctx.lineWidth = lineWidth;
-        ctx.strokeStyle = this.props.strokeColor;
-        ctx.fillStyle = this.props.fillColor;
+        ctx.strokeStyle = object.strokeColor;
+        ctx.fillStyle = object.fillColor;
         
-        ctx.beginPath()
-        ctx.rect(this.props.startPoint.x, this.props.startPoint.y, width, height);
-        ctx.stroke()
+        ctx.beginPath();
+        ctx.rect(object.startPoint.x, object.startPoint.y, width, height);
+        ctx.stroke();
+        ctx.fill();
     }
     
-    move() {
-        const { x: currX, y: currY } = this.props.currentPoint;
-        const ctx  = this.props.ctx;
-        const lineWidth = 5;
-        if(this.props.isDraw){
-            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        }
-        const width = currX - this.props.startPoint.x; 
-        const height = currY - this.props.startPoint.y; 
-        ctx.beginPath()
-        ctx.lineWidth = lineWidth
-        ctx.strokeStyle = this.props.strokeColor
-        ctx.rect(this.props.startPoint.x, this.props.startPoint.y, width, height);
-        ctx.stroke()
+    isSelect(object: VectorType, point: Point) {
+        const left = Math.min(object.startPoint.x, object.currentPoint.x);
+        const right = Math.max(object.startPoint.x, object.currentPoint.x);
+        const top = Math.min(object.startPoint.y, object.currentPoint.y);
+        const bottom = Math.max(object.startPoint.y, object.currentPoint.y);
+
+        return (
+            point.x >= left && point.x <= right &&
+            point.y >= top && point.y <= bottom
+        );
     }
 }
 

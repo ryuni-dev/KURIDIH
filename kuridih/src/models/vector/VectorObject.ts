@@ -1,14 +1,9 @@
 import VectorType from "@/types/VectorType";
+import { Point } from "@/types/point";
 
 abstract class Vector {
-    props: VectorType;
-
-    constructor(props: VectorType) {
-        this.props = props
-    }
-
-    abstract draw(): void;
-    abstract move(): void;
+    abstract draw(object: VectorType): void;
+    abstract isSelect(object: VectorType, point: Point): boolean;
 
 }
 

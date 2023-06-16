@@ -8,7 +8,7 @@ import ObjectDetails from "@/components/ObjectDetails";
 
 export default function Editor() {
     const [color, setColor] = useState<string>('#000000')
-    const { canvasRef, onMouseDown, clear, mode, setMode, selectedObject } = useDraw(color)
+    const { canvasRef, onMouseDown, clear, mode, setMode, infoObject } = useDraw(color)
 
     return (
         <>        
@@ -32,9 +32,10 @@ export default function Editor() {
                 </div>
                 <ObjectDetails 
                     mode={mode}
-                    startPoint={{x: 0, y: 0}}
-                    endPoint={{x: 0, y: 0}}
-                    color="#000000"
+                    startPoint={infoObject?.startPoint}
+                    endPoint={infoObject?.currentPoint}
+                    zOrder={infoObject?.id}
+                    color={infoObject?.fillColor}
                 />
             </div>
         </>

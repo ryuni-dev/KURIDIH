@@ -3,33 +3,55 @@ import VectorRect from "./vector/VectorRect";
 import VectorCircle from "./vector/VectorCircle";
 import VectorBrush from "./vector/VectorBrush";
 import VectorLine from "./vector/VectorLine";
+import { Point } from "@/types/point";
 
 class VectorFactory {
+    brush: VectorBrush;
+    line: VectorLine;
+    rect: VectorRect;
+    circle: VectorCircle;
+
+    constructor() {
+        this.brush = new VectorBrush();
+        this.line = new VectorLine();
+        this.rect = new VectorRect();
+        this.circle = new VectorCircle();
+    }
 
     create(object: VectorType) {
         let mode = object.mode;
-        const brush = new VectorBrush(object);
-        const line = new VectorLine(object);
-        const rect = new VectorRect(object);
-        const circle = new VectorCircle(object);
 
-        if (object.isSelect){
+        if (mode === 'brush') {
+            this.brush.draw(object)
+        }
+        else if (mode === 'line'){
+            this.line.draw(object);
+        }
+        else if (mode === 'rect'){
+            this.rect.draw(object)
+        }
+        else if (mode === 'circle') {
+            this.circle.draw(object)
+        }
+    }
 
+    checkSelect(object: VectorType, point: Point): boolean {
+        let mode = object.mode;
+
+        if (mode === 'brush') {
+            return this.brush.isSelect(object, point);
+        }
+        else if (mode === 'line'){
+            return this.line.isSelect(object, point);
+        }
+        else if (mode === 'rect'){
+            return this.rect.isSelect(object, point);
+        }
+        else if (mode === 'circle') {
+            return this.circle.isSelect(object, point);
         }
         else{
-            if (mode === 'brush') {
-                brush.draw()
-            }
-            else if (mode === 'line'){
-                line.draw();
-            }
-            else if (mode === 'rect'){
-                rect.draw()
-            }
-            else if (mode === 'circle') {
-                circle.draw()
-            }
-
+            return false;
         }
     }
 }

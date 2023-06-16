@@ -18,13 +18,13 @@ const LeftSidebar = ({ setMode, clear, color, setColor }: Props) => {
             >
             SELECT
             </button>
-            <button 
+            {/* <button 
                 onClick={()=>{setMode(() => 'brush')}}
                 type="button" 
                 className="-mt-px py-3 px-4 inline-flex justify-center items-center gap-2 font-medium text-white align-middle hover:bg-gray-50 hover:text-black focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all text-sm"
             >
             BRUSH
-            </button>
+            </button> */}
             <button 
                 onClick={()=>{setMode(() => 'line')}}
                 type="button" 

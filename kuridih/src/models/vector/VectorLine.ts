@@ -1,45 +1,36 @@
 import VectorType from "@/types/VectorType";
 import Vector from "./VectorObject";
+import { Point } from "@/types/point";
 
 class VectorLine extends Vector {
-    constructor(props: VectorType) {
-        super(props);
-    }
-    
-    draw() {
-        const { x: currX, y: currY } = this.props.currentPoint;
-        const ctx  = this.props.ctx;
+    draw(object: VectorType) {
+        const { x: currX, y: currY } = object.currentPoint;
+        const ctx  = object.ctx;
         const lineWidth = 3;
-        if(this.props.isDraw){
+        if(object.isDraw){
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         }
 
         ctx.lineWidth = lineWidth;
-        ctx.strokeStyle = this.props.strokeColor;
-        ctx.fillStyle = this.props.fillColor;
+        ctx.strokeStyle = object.strokeColor;
+        ctx.fillStyle = object.fillColor;
         
         ctx.beginPath()
-        ctx.moveTo(this.props.startPoint.x, this.props.startPoint.y);
+        ctx.moveTo(object.startPoint.x, object.startPoint.y);
         ctx.lineTo(currX, currY);
         ctx.stroke()
     }
 
-    move() {
-        const { x: currX, y: currY } = this.props.currentPoint;
-        const ctx  = this.props.ctx;
-        const lineWidth = 3;
-        if(this.props.isDraw){
-            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        }
-
-        ctx.lineWidth = lineWidth;
-        ctx.strokeStyle = this.props.strokeColor;
-        ctx.fillStyle = this.props.fillColor;
+    isSelect(object: VectorType, point: Point) {
+        const minX = Math.min(object.startPoint.x, object.currentPoint.x);
+        const maxX = Math.max(object.startPoint.x, object.currentPoint.x);
+        const minY = Math.min(object.startPoint.y, object.currentPoint.y);
+        const maxY = Math.max(object.startPoint.y, object.currentPoint.y);
         
-        ctx.beginPath()
-        ctx.moveTo(this.props.startPoint.x, this.props.startPoint.y);
-        ctx.lineTo(currX, currY);
-        ctx.stroke()
+        return (
+            point.x >= minX && point.x <= maxX &&
+            point.y >= minY && point.y <= maxY
+        );
     }
 };
 

@@ -1,48 +1,35 @@
 import VectorType from "@/types/VectorType";
 import Vector from "./VectorObject";
+import { Point } from "@/types/point";
 
 class VectorCircle extends Vector {
-    constructor(props: VectorType) {
-        super(props);
-    }
-
-    draw() {
-        const { x: currX, y: currY } = this.props.currentPoint
-        const ctx  = this.props.ctx
+    draw(object: VectorType) {
+        const { x: currX, y: currY } = object.currentPoint
+        const ctx  = object.ctx
         ctx.lineWidth = 3;
 
-        if(this.props.isDraw){
+        if(object.isDraw){
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         }
 
-        let rad = Math.abs(currX- this.props.startPoint.x);
-        ctx.strokeStyle = this.props.strokeColor;
-        ctx.fillStyle = this.props.fillColor;
+        let rad = Math.abs(currX- object.startPoint.x);
+        ctx.strokeStyle = object.strokeColor;
+        ctx.fillStyle = object.fillColor;
 
-        ctx.beginPath()
-        ctx.arc(this.props.startPoint.x, this.props.startPoint.y, rad, 0, 2 * Math.PI)
-        ctx.stroke()
-        ctx.closePath()
+        ctx.beginPath();
+        ctx.arc(object.startPoint.x, object.startPoint.y, rad, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.fill();
     }
     
-        move() {
-            const { x: currX, y: currY } = this.props.currentPoint
-            const ctx  = this.props.ctx
-            ctx.lineWidth = 3;
-    
-            if(this.props.isDraw){
-                ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-            }
-    
-            let rad = Math.abs(currX- this.props.startPoint.x);
-            ctx.strokeStyle = this.props.strokeColor;
-            ctx.fillStyle = this.props.fillColor;
-    
-            ctx.beginPath()
-            ctx.arc(this.props.startPoint.x, this.props.startPoint.y, rad, 0, 2 * Math.PI)
-            ctx.stroke()
-            ctx.closePath()
-            
+    isSelect(object: VectorType, point: Point) {
+        const rad = Math.abs(object.currentPoint.x - object.startPoint.x);
+        const distance = Math.sqrt(
+            Math.pow(point.x - object.startPoint.x, 2) + Math.pow(point.y - object.startPoint.y, 2)
+        );
+        
+        return distance <= rad;
     }
 };
 
