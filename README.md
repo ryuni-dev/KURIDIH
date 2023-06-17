@@ -3,6 +3,7 @@
 > 디자인 패턴을 적용한 벡터 그래픽 웹 에디터
 
 [Demo](https://kuridih.vercel.app/)
+
 [발표자료](https://www.miricanvas.com/v/125s8nk)
 
 ### 프로젝트 소개
